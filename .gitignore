@@ -1,0 +1,9 @@
+/gateway/vendor/
+/gateway/var/cache/
+/gateway/var/logs/
+/gateway/config/xml/
+/gateway/app/config/parameters.php
+/gateway/app/config/parameters.yml
+/gateway/.env
+/gateway/.env.local
+/gateway/.htaccess

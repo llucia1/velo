@@ -1,0 +1,147 @@
+services:
+
+  nginx:
+    image: nginx:stable
+    container_name: ps9.1-nginx
+    restart: unless-stopped
+    ports:
+      - "8081:80"
+    volumes:
+      - ./gateway:/var/www/html                               # coincide con root del default.conf
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - gateway
+    networks:
+      - app_net
+
+  gateway:
+    image: prestashop-php8.4:latest
+    container_name: ps9.1-gateway
+    restart: unless-stopped
+    working_dir: /var/www/html                                # coincide con WORKDIR del Dockerfile
+    volumes:
+      - ./gateway:/var/www/html                              # coincide con working_dir
+      - ./shared:/shared                                     # acceso a shared desde PS
+    environment:
+      PS_DB_HOST: mysql
+      PS_DB_NAME: prestashop
+      PS_DB_USER: prestashop
+      PS_DB_PASSWD: prestashop
+      PS_DOMAIN: localhost:8081
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USER: admin
+      RABBITMQ_PASS: admin123
+    depends_on:
+      mysql:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      mailpit:
+        condition: service_started
+    networks:
+      - app_net
+
+  mysql:
+    image: mysql:8.0
+    container_name: ps9.1-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: prestashop
+      MYSQL_USER: prestashop
+      MYSQL_PASSWORD: prestashop
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:                                             # gateway espera a que mysql esté listo
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - app_net
+
+  rabbitmq:
+    image: rabbitmq:3.12-management-alpine
+    container_name: ps9.1-rabbitmq
+    restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin123
+    ports:
+      - "5673:5672"
+      - "15673:15672"
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    healthcheck:                                             # scraping y gateway esperan a rabbit
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - app_net
+
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: ps9.1-mailpit
+    restart: unless-stopped
+    ports:
+      - "8025:8025"                                         # UI web de correos
+      - "1025:1025"                                         # SMTP para PS
+    networks:
+      - app_net
+
+  scraping:
+    image: python:3.12-slim
+    container_name: ps9.1-scraping
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - ./scraping:/app
+      - ./shared:/shared                                     # shared accesible desde scraping
+    environment:
+      RABBITMQ_HOST: rabbitmq                               # nombre del servicio, no localhost
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USER: admin
+      RABBITMQ_PASS: admin123
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_DB: prestashop
+      MYSQL_USER: prestashop
+      MYSQL_PASSWORD: prestashop
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      mysql:
+        condition: service_healthy
+    command: python main.py
+    networks:
+      - app_net
+
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: ps9.1-n8n
+    restart: unless-stopped
+    ports:
+      - "5679:5678"
+    volumes:
+      - ./n8n:/home/node/.n8n                            # volumen nombrado para persistencia
+    environment:
+      N8N_HOST: 0.0.0.0                                    # escuchar en todas las interfaces
+      N8N_PORT: 5678
+      N8N_PROTOCOL: http
+      WEBHOOK_URL: http://localhost:5679                    # URL pública para webhooks
+      GENERIC_TIMEZONE: Europe/Madrid
+    networks:
+      - app_net
+
+volumes:
+  mysql-data:
+  rabbitmq-data:
+  n8n-data:                                                 # declarado para persistir flujos de n8n
+
+networks:
+  app_net:
+    driver: bridge
