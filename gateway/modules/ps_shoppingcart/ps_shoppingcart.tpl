@@ -17,11 +17,11 @@
  * International Registered Trademark & Property of PrestaShop SA
  *}
 <div id="blockcart-wrapper">
-  <div class="blockcart cart-preview" data-refresh-url="{$refresh_url}">
+  <div class="blockcart cart-preview" data-refresh-url="{$refresh_url|escape:'html':'UTF-8'}">
     <div class="header">
-      <a rel="nofollow" href="{$cart_url}">
+      <a rel="nofollow" href="{$cart_url|escape:'html':'UTF-8'}">
         <span>{l s='Cart' d='Shop.Theme.Actions'}</span>
-        <span>{$cart.summary_string}</span>
+        <span>{$cart.summary_string|escape:'html':'UTF-8'}</span>
       </a>
     </div>
     <div class="body">
@@ -32,17 +32,15 @@
       </ul>
       <div class="cart-subtotals">
         {foreach from=$cart.subtotals item="subtotal"}
-          {if isset($subtotal.type, $subtotal.label, $subtotal.amount)}
-            <div class="{$subtotal.type}">
-              <span class="label">{$subtotal.label}</span>
-              <span class="value">{$subtotal.amount}</span>
-            </div>
-          {/if}
+          <div class="{$subtotal.type|escape:'html':'UTF-8'}">
+            <span class="label">{$subtotal.label|escape:'html':'UTF-8'}</span>
+            <span class="value">{$subtotal.amount|escape:'html':'UTF-8'}</span>
+          </div>
         {/foreach}
       </div>
       <div class="cart-total">
-        <span class="label">{$cart.totals.total.label}</span>
-        <span class="value">{$cart.totals.total.amount}</span>
+        <span class="label">{$cart.totals.total.label|escape:'html':'UTF-8'}</span>
+        <span class="value">{$cart.totals.total.amount|escape:'html':'UTF-8'}</span>
       </div>
     </div>
   </div>

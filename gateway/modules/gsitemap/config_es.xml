@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+    <name>gsitemap</name>
+    <displayName><![CDATA[Google sitemap]]></displayName>
+    <version><![CDATA[5.0.0]]></version>
+    <description><![CDATA[Genera un sitemap XML para tu tienda y lo mantiene actualizado. Compatible con los principales motores de b&uacute;squeda.]]></description>
+    <author><![CDATA[PrestaShop]]></author>
+    <tab><![CDATA[checkout]]></tab>
+	<confirmUninstall><![CDATA[¿Estás seguro que quieres desinstalar este módulo?]]></confirmUninstall>
+    <is_configurable>1</is_configurable>
+    <need_instance>0</need_instance>
+</module>

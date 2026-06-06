@@ -1,0 +1,251 @@
+.ets-product-specific {
+  float: left;
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+.ets-product-specific .owl-stage-outer,
+.ets-product-specific .owl-item {
+  height: 100%;
+}
+.thumbnail-container .table {
+  display: table;
+  height: 100%;
+  margin-bottom: 0;
+}
+.thumbnail-container .product_special_img {
+  border-right: 1px solid #f1f1f1;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 46%;
+}
+.ets-product-specific .product-miniature .product-title {
+  font-weight: bold;
+  line-height: 100%;
+  margin-bottom: 10px;
+  margin-top: 0;
+  text-transform: uppercase;
+}
+.ets-product-specific .table-cell {
+  position: relative;
+  vertical-align: top;
+}
+.ets-product-specific .product-description .comments_note {
+  margin-bottom: 10px;
+}
+.ets-product-specific .product-price-and-shipping {
+  margin-bottom: 10px;
+  opacity: 1!important;
+  visibility: visible!important;
+}
+.ets-product-specific .product-miniature .thumbnail-container {
+  display: flex;
+  display: -o-flex;
+  display: -ms-flex;
+  display: -moz-flex;
+  display: -webkit-flex;
+  height: 100%;
+  border: none;
+  padding: 30px 0;
+}
+.ets-product-specific .product-miniature {
+  height: 100%;
+  margin-bottom: 0;
+  float: none;
+}
+.ets-product-specific .owl-stage {
+  float: left;
+  height: 100%;
+}
+#ybc_specificprices {
+  border: 1px solid #f1f1f1;
+  height: 100%;
+}
+#ybc_specificprices .products-section-title {
+  left: 15px;
+  position: absolute;
+  right: 15px;
+  top: 0;
+  width: auto;
+}
+.ets-product-specific .short_description {
+  display: block;
+}
+.ets-product-specific .product-description {
+  padding-bottom: 0px;
+  padding-left: 30px;
+  padding-right: 30px;
+  text-align: left;
+  width: 54%;
+}
+.ets-product-specific .product-miniature .product-title,
+.ets-product-specific .product-price-and-shipping,
+.ets-product-specific .star_content {
+  text-align: left;
+}
+.ybc_countdown {
+  margin-bottom: 80px;
+  padding-top: 55px;
+}
+
+.ybc_cd_item{
+    float: left;
+    padding: 0;
+    font-size: 20px;
+    border: 3px solid #333!important;
+    font-size: 14px;
+    color: #ffffff;
+    width: 44px;
+    position: relative;
+    line-height: 28px;
+}
+
+.ybc_cd_item .number{
+    font-size:  13px;
+    font-weight: normal;
+    color: #fff;
+    float: left;
+    width: 100%;
+    margin-top: 1px;
+    background-color: #333;
+    text-align: center;
+    text-transform: capitalize;
+    line-height: 22px;
+}
+.ets_clock {
+  display: none;
+  float: none;
+  line-height: 30px;
+  margin: 0 auto;
+  position: relative;
+  text-align: center;
+  width: 208px;
+}
+.ets_clock.active {
+  display: flexbox;
+  display: -o-flexbox;
+  display: -ms-flexbox;
+  display: -moz-flexbox;
+  display: -webkit-flexbox;
+  display: flex;
+  display: -o-flex;
+  display: -ms-flex;
+  display: -moz-flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  -o-justify-content: space-between;
+  -ms-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -webkit-justify-content: space-between;
+}
+.ets-product-specific .owl-item {
+  display: flexbox;
+  display: -o-flexbox;
+  display: -ms-flexbox;
+  display: -moz-flexbox;
+  display: -webkit-flexbox;
+  display: flex;
+  display: -o-flex;
+  display: -ms-flex;
+  display: -moz-flex;
+  display: -webkit-flex;
+}
+.ets-product-specific .discount-percentage {
+  font-size: 13px;
+  font-weight: normal;
+  margin-left: 10px;
+  padding: 1px 7px;
+}
+.ets-product-specific .thumbnail.product-thumbnail {
+  padding: 0 15px;
+  position: relative;
+}
+@media (min-width: 992px) and (max-width: 1199px){
+    .ets_clock {
+      width: 185px;
+    }
+}
+@media (max-width: 991px){
+    .ybc_countdown {
+      margin-bottom: 60px;
+      padding-top: 55px;
+      width: 100%;
+      float: left;
+    }
+    .bg-home .homeblog_wrapper {
+      float: left;
+      width: 100%;
+    }
+    #ybc_specificprices {
+      border: 1px solid #e7e7e7;
+      float: left;
+      height: 100%;
+      width: 100%;
+    }
+}
+@media (max-width: 767px){
+    .ets-product-specific .product-description .table-cell {
+      padding-right: 15px;
+    }
+    .thumbnail-container .product_special_img,
+    .ets-product-specific .product-description {
+      width: 50%;
+      padding-bottom: 0;
+    }
+    .thumbnail-container .table {
+      margin-bottom: 0;
+    }
+    .ets-product-specific .product-description .table-cell {
+      padding-right: 0;
+    }
+    .ets-product-specific .product-description{
+        padding-left: 15px;
+    }
+    .ets-product-specific .product-miniature .thumbnail-container {
+      padding: 30px 0 15px;
+    }
+}
+@media (max-width: 479px){
+    .thumbnail-container .product_special_img {
+      border: medium none;
+      margin-bottom: 25px;
+      padding-right: 0;
+      width: 100%;
+    }
+    .ybc_countdown .short_description > p {
+      margin: 0;
+    }
+    .ets-product-specific .product-miniature .thumbnail-container {
+      display: block;
+      padding-bottom: 0;
+      padding-top: 0;
+    }
+    .ets-product-specific .product-description {
+      padding: 0;
+      width: 100%;
+    }
+    .ets-product-specific .product-miniature .thumbnail-container {
+      display: block;
+    }
+    .ets-product-specific .product-description .table-cell {
+      padding: 0 15px;
+      text-align: center;
+    }
+    .ets-product-specific .product-miniature .product-title, .ets-product-specific .product-price-and-shipping, .ets-product-specific .star_content {
+      text-align: center;
+    }
+    #ybc_specificprices .owl-nav {
+      margin-bottom: 15px;
+      margin-top: 15px;
+      top: auto;
+    }
+}
+
+
+
+
+
+
+
+
+

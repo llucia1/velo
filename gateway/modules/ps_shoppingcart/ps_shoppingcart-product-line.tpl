@@ -16,12 +16,12 @@
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  * International Registered Trademark & Property of PrestaShop SA
  *}
-<span class="product-quantity">{$product.quantity}</span>
-<span class="product-name">{$product.name}</span>
-<span class="product-price">{$product.price}</span>
+<span class="product-quantity">{$product.quantity|escape:'html':'UTF-8'}</span>
+<span class="product-name">{$product.name|escape:'html':'UTF-8'}</span>
+<span class="product-price">{$product.price|escape:'html':'UTF-8'}</span>
 <a  class="remove-from-cart"
     rel="nofollow"
-    href="{$product.remove_from_cart_url}"
+    href="{$product.remove_from_cart_url|escape:'html':'UTF-8'}"
     data-link-action="remove-from-cart"
 >
     {l s="Remove" d="Shop.Theme.Actions"}
@@ -31,16 +31,16 @@
         <ul>
             {foreach from=$product.customizations item="customization"}
                 <li>
-                    <span class="product-quantity">{$customization.quantity}</span>
-                    <a href="{$customization.remove_from_cart_url}" class="remove-from-cart" rel="nofollow">{l s='Remove' d="Shop.Theme.Actions"}</a>
+                    <span class="product-quantity">{$customization.quantity|escape:'html':'UTF-8'}</span>
+                    <a href="{$customization.remove_from_cart_url|escape:'html':'UTF-8'}" class="remove-from-cart" rel="nofollow">{l s='Remove' d="Shop.Theme.Actions"}</a>
                     <ul>
                         {foreach from=$customization.fields item="field"}
                             <li>
-                                <label>{$field.label}</label>
+                                <label>{$field.label|escape:'html':'UTF-8'}</label>
                                 {if $field.type == 'text'}
-                                    <span>{$field.text}</span>
+                                    <span>{$field.text|escape:'html':'UTF-8'}</span>
                                 {elseif $field.type == 'image'}
-                                    <img src="{$field.image.small.url}">
+                                    <img src="{$field.image.small.url|escape:'html':'UTF-8'}">
                                 {/if}
                             </li>
                         {/foreach}

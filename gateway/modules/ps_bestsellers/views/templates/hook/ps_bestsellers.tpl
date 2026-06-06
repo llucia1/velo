@@ -29,5 +29,5 @@
       {include file="catalog/_partials/miniatures/product.tpl" product=$product}
     {/foreach}
   </div>
-  <a href="{$allBestSellers}">{l s='All best sellers' d='Modules.Bestsellers.Shop'}</a>
+  <a href="{$allBestSellers|escape:'html':'UTF-8'}">{l s='All best sellers' d='Modules.Bestsellers.Shop'}</a>
 </section>

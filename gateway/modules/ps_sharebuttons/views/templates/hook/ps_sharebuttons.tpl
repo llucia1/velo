@@ -28,7 +28,7 @@
     <div class="social-sharing">
       <ul>
         {foreach from=$social_share_links item='social_share_link'}
-          <li class="{$social_share_link.class}"><a href="{$social_share_link.url}">{$social_share_link.label}</a></li>
+          <li class="{$social_share_link.class|escape:'html':'UTF-8'}"><a href="{$social_share_link.url|escape:'html':'UTF-8'}">{$social_share_link.label|escape:'html':'UTF-8'}</a></li>
         {/foreach}
       </ul>
     </div>

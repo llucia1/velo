@@ -18,8 +18,6 @@
  * International Registered Trademark & Property of PrestaShop SA
  */
 
-use PrestaShop\PrestaShop\Adapter\Presenter\Cart\CartPresenter;
-
 if (!defined('_PS_VERSION_')) {
     exit;
 }
@@ -37,7 +35,7 @@ class Ps_Shoppingcart extends Module implements WidgetInterface
     {
         $this->name = 'ps_shoppingcart';
         $this->tab = 'front_office_features';
-        $this->version = '3.0.0';
+        $this->version = '2.0.4';
         $this->author = 'PrestaShop';
         $this->need_instance = 0;
 
@@ -46,14 +44,14 @@ class Ps_Shoppingcart extends Module implements WidgetInterface
 
         $this->displayName = $this->trans('Shopping cart', [], 'Modules.Shoppingcart.Admin');
         $this->description = $this->trans('Display a shopping cart icon on your pages and the number of items it contains.', [], 'Modules.Shoppingcart.Admin');
-        $this->ps_versions_compliancy = ['min' => '1.7.5.0', 'max' => _PS_VERSION_];
+        $this->ps_versions_compliancy = ['min' => '1.7.1.0', 'max' => _PS_VERSION_];
         $this->controllers = ['ajax'];
     }
 
     /**
      * @return void
      */
-    public function hookDisplayHeader()
+    public function hookHeader()
     {
         if (Configuration::isCatalogMode()) {
             return;
@@ -90,33 +88,22 @@ class Ps_Shoppingcart extends Module implements WidgetInterface
      */
     public function getWidgetVariables($hookName, array $params)
     {
-        return [
-            'cart' => $this->getPresentedCart(),
-            'refresh_url' => $this->context->link->getModuleLink('ps_shoppingcart', 'ajax', [], null, null, null, true),
-            'cart_url' => $this->getCartSummaryURL(),
-        ];
-    }
+        $cart_url = $this->getCartSummaryURL();
 
-    /**
-     * Provides an already presented object from the context if set.
-     * If not, runs the presenter.
-     *
-     * @return array presented cart
-     */
-    private function getPresentedCart()
-    {
-        /*
-         * We will use the already presented cart in the first place. It should be already in the template.
-         * Check FrontController::assignGeneralPurposeVariables for more information.
-         *
-         * If it's not, we will present the cart ourselves. There will always be a cart object
-         * assigned in FrontController::init.
-         */
-        if (!empty($this->context->smarty->getTemplateVars('cart'))) {
-            return $this->context->smarty->getTemplateVars('cart');
+        $cart = isset($params['cart']) ? $params['cart'] : $this->context->cart;
+        if (version_compare(_PS_VERSION_, '9.0.0', '>=')) {
+            $data = (new PrestaShop\PrestaShop\Adapter\Presenter\Cart\CartPresenter())->present($cart);
         } else {
-            return (new CartPresenter())->present($this->context->cart);
+            /* @phpstan-ignore-next-line */
+            $classCartPresenter = 'PrestaShop\\PrestaShop\\Adapter\\Cart\\CartPresenter';
+            /* @phpstan-ignore-next-line */
+            $data = call_user_func([new $classCartPresenter(), 'present'], $cart);
         }
+        return [
+            'cart' => $data,
+            'refresh_url' => $this->context->link->getModuleLink('ps_shoppingcart', 'ajax', [], null, null, null, true),
+            'cart_url' => $cart_url,
+        ];
     }
 
     /**
@@ -137,6 +124,7 @@ class Ps_Shoppingcart extends Module implements WidgetInterface
     }
 
     /**
+     * @param Cart $cart
      * @param int $id_product
      * @param int $id_product_attribute
      * @param int $id_customization
@@ -145,9 +133,16 @@ class Ps_Shoppingcart extends Module implements WidgetInterface
      *
      * @throws Exception
      */
-    public function renderModal($id_product, $id_product_attribute, $id_customization)
+    public function renderModal(Cart $cart, $id_product, $id_product_attribute, $id_customization)
     {
-        $data = $this->getPresentedCart();
+        if (version_compare(_PS_VERSION_, '9.0.0', '>=')) {
+            $data = (new PrestaShop\PrestaShop\Adapter\Presenter\Cart\CartPresenter())->present($cart);
+        } else {
+            /* @phpstan-ignore-next-line */
+            $classCartPresenter = 'PrestaShop\\PrestaShop\\Adapter\\Cart\\CartPresenter';
+            /* @phpstan-ignore-next-line */
+            $data = call_user_func([new $classCartPresenter(), 'present'], $cart);
+        }
         $product = null;
         foreach ($data['products'] as $p) {
             if ((int) $p['id_product'] == $id_product &&
@@ -195,7 +190,7 @@ class Ps_Shoppingcart extends Module implements WidgetInterface
 
         return
             parent::install()
-                && $this->registerHook('displayHeader')
+                && $this->registerHook('header')
                 && $this->registerHook('displayNav2')
                 && Configuration::updateValue('PS_BLOCK_CART_AJAX', 1);
     }
