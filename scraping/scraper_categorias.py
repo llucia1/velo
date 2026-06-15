@@ -513,6 +513,24 @@ def find_parent_slug(current_slug: str, all_no_id: list) -> str | None:
                 best_len = len(s)
     return best
 
+def clean_prestashop_category_name(name: str) -> str:
+    """Limpia nombres de categoría para que PrestaShop los acepte."""
+    name = (name or '').strip()
+
+    # Casos típicos de medidas/rangos del proveedor
+    name = re.sub(r'^>\s*(.+)$', r'Mayor que \1', name)
+    name = re.sub(r'^<\s*(.+)$', r'Menor que \1', name)
+
+    # Caracteres que PrestaShop no permite en Category->name
+    name = name.replace('>', ' mayor que ')
+    name = name.replace('<', ' menor que ')
+    name = name.replace('{', '(')
+    name = name.replace('}', ')')
+
+    # Normalizar espacios
+    name = ' '.join(name.split())
+
+    return name
 
 # ==============================================================================
 # LOGIN
@@ -577,6 +595,72 @@ def scrape_category(session: requests.Session, slug: str) -> dict:
         log.warning(f"Error en {url}: {e}")
 
     return result
+def make_link_rewrite(slug: str, odoo_id: str) -> str:
+    """
+    Genera una URL amigable válida para PrestaShop usando el slug del proveedor.
+    No usa el nombre de la categoría porque puede contener caracteres como >.
+    """
+    clean = slug.strip('/')
+
+    if clean.startswith('shop/category/'):
+        clean = clean[len('shop/category/'):]
+
+    clean = slug_without_id(clean)
+
+    clean = clean.lower()
+    clean = re.sub(r'[^a-z0-9-]+', '-', clean)
+    clean = re.sub(r'-+', '-', clean)
+    clean = clean.strip('-')
+
+    if odoo_id:
+        clean = f"{clean}-{odoo_id}"
+
+    return clean or f"categoria-{odoo_id}"
+
+def make_link_rewrite(name: str, slug: str, ps_id: int) -> str:
+    """
+    Genera una URL amigable válida para PrestaShop.
+
+    Usa el nombre para respetar mayor-que / menor-que.
+    Añade nuestro ID de PrestaShop al final para evitar duplicados.
+    """
+    raw_name = (name or '').strip()
+    clean_name = raw_name.lower()
+
+    if raw_name.startswith('>'):
+        base = 'mayor-que-' + raw_name[1:].strip()
+    elif raw_name.startswith('<'):
+        base = 'menor-que-' + raw_name[1:].strip()
+    elif clean_name.startswith('mayor que '):
+        base = raw_name
+    elif clean_name.startswith('menor que '):
+        base = raw_name
+    else:
+        base = (slug or '').strip('/')
+
+        if base.startswith('shop/category/'):
+            base = base[len('shop/category/'):]
+
+        base = slug_without_id(base)
+
+    base = base.lower()
+
+    base = (
+        base
+        .replace('á', 'a')
+        .replace('é', 'e')
+        .replace('í', 'i')
+        .replace('ó', 'o')
+        .replace('ú', 'u')
+        .replace('ü', 'u')
+        .replace('ñ', 'n')
+    )
+
+    base = re.sub(r'[^a-z0-9]+', '-', base)
+    base = re.sub(r'-+', '-', base)
+    base = base.strip('-')
+
+    return f"{base}" if base else f"categoria-{ps_id}"
 
 
 # ==============================================================================
@@ -641,13 +725,13 @@ def main():
             writer.writerow([
                 ps_id,
                 1,
-                r['name'],
+                clean_prestashop_category_name(r['name']),
                 parent_id,
                 r['is_root'],
                 '',
                 '',
                 '',
-                '',
+                make_link_rewrite(r['name'], r['slug'], ps_id),
                 r['image_url'],
             ])
 
