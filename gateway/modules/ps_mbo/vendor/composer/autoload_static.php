@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit5fbead78089182978609c09444be406e
+class ComposerStaticInit76653acd0aedb63976c83d7a50d19bfa
 {
     public static $files = array (
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
@@ -215,6 +215,7 @@ class ComposerStaticInit5fbead78089182978609c09444be406e
         'Firebase\\JWT\\ExpiredException' => __DIR__ . '/..' . '/firebase/php-jwt/src/ExpiredException.php',
         'Firebase\\JWT\\JWK' => __DIR__ . '/..' . '/firebase/php-jwt/src/JWK.php',
         'Firebase\\JWT\\JWT' => __DIR__ . '/..' . '/firebase/php-jwt/src/JWT.php',
+        'Firebase\\JWT\\JWTExceptionWithPayloadInterface' => __DIR__ . '/..' . '/firebase/php-jwt/src/JWTExceptionWithPayloadInterface.php',
         'Firebase\\JWT\\Key' => __DIR__ . '/..' . '/firebase/php-jwt/src/Key.php',
         'Firebase\\JWT\\SignatureInvalidException' => __DIR__ . '/..' . '/firebase/php-jwt/src/SignatureInvalidException.php',
         'GuzzleHttp\\Promise\\AggregateException' => __DIR__ . '/..' . '/guzzlehttp/promises/src/AggregateException.php',
@@ -867,9 +868,9 @@ class ComposerStaticInit5fbead78089182978609c09444be406e
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit5fbead78089182978609c09444be406e::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit5fbead78089182978609c09444be406e::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit5fbead78089182978609c09444be406e::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit76653acd0aedb63976c83d7a50d19bfa::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit76653acd0aedb63976c83d7a50d19bfa::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit76653acd0aedb63976c83d7a50d19bfa::$classMap;
 
         }, null, ClassLoader::class);
     }

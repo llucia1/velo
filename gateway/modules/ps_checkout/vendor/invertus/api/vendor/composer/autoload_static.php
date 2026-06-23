@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit82d6cc943be8a0987db08bf75e86e0a4
+class ComposerStaticInit9eb28c9e9c36fd14b2739cc98f764587
 {
     public static $prefixLengthsPsr4 = array (
         'P' =>
@@ -46,6 +46,7 @@ class ComposerStaticInit82d6cc943be8a0987db08bf75e86e0a4
         'PsCheckout\\Api\\Dto\\PayPal\\SellerProtection' => __DIR__ . '/../../..' . '/api/src/Dto/PayPal/SellerProtection.php',
         'PsCheckout\\Api\\Http\\CheckoutHttpClient' => __DIR__ . '/../../..' . '/api/src/Http/CheckoutHttpClient.php',
         'PsCheckout\\Api\\Http\\CheckoutHttpClientInterface' => __DIR__ . '/../../..' . '/api/src/Http/CheckoutHttpClientInterface.php',
+        'PsCheckout\\Api\\Http\\Configuration\\AbstractHttpClientConfigurationBuilder' => __DIR__ . '/../../..' . '/api/src/Http/Configuration/AbstractHttpClientConfigurationBuilder.php',
         'PsCheckout\\Api\\Http\\Configuration\\CheckoutClientConfigurationBuilder' => __DIR__ . '/../../..' . '/api/src/Http/Configuration/CheckoutClientConfigurationBuilder.php',
         'PsCheckout\\Api\\Http\\Configuration\\HttpClientConfigurationBuilderInterface' => __DIR__ . '/../../..' . '/api/src/Http/Configuration/HttpClientConfigurationBuilderInterface.php',
         'PsCheckout\\Api\\Http\\Configuration\\MaaslandOrderHttpClientConfigurationBuilder' => __DIR__ . '/../../..' . '/api/src/Http/Configuration/MaaslandOrderHttpClientConfigurationBuilder.php',
@@ -80,9 +81,9 @@ class ComposerStaticInit82d6cc943be8a0987db08bf75e86e0a4
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit82d6cc943be8a0987db08bf75e86e0a4::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit82d6cc943be8a0987db08bf75e86e0a4::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit82d6cc943be8a0987db08bf75e86e0a4::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit9eb28c9e9c36fd14b2739cc98f764587::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit9eb28c9e9c36fd14b2739cc98f764587::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit9eb28c9e9c36fd14b2739cc98f764587::$classMap;
 
         }, null, ClassLoader::class);
     }

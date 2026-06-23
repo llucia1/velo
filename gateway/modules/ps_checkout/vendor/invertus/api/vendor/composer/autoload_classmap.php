@@ -21,6 +21,7 @@ return array(
     'PsCheckout\\Api\\Dto\\PayPal\\SellerProtection' => $baseDir . '/api/src/Dto/PayPal/SellerProtection.php',
     'PsCheckout\\Api\\Http\\CheckoutHttpClient' => $baseDir . '/api/src/Http/CheckoutHttpClient.php',
     'PsCheckout\\Api\\Http\\CheckoutHttpClientInterface' => $baseDir . '/api/src/Http/CheckoutHttpClientInterface.php',
+    'PsCheckout\\Api\\Http\\Configuration\\AbstractHttpClientConfigurationBuilder' => $baseDir . '/api/src/Http/Configuration/AbstractHttpClientConfigurationBuilder.php',
     'PsCheckout\\Api\\Http\\Configuration\\CheckoutClientConfigurationBuilder' => $baseDir . '/api/src/Http/Configuration/CheckoutClientConfigurationBuilder.php',
     'PsCheckout\\Api\\Http\\Configuration\\HttpClientConfigurationBuilderInterface' => $baseDir . '/api/src/Http/Configuration/HttpClientConfigurationBuilderInterface.php',
     'PsCheckout\\Api\\Http\\Configuration\\MaaslandOrderHttpClientConfigurationBuilder' => $baseDir . '/api/src/Http/Configuration/MaaslandOrderHttpClientConfigurationBuilder.php',

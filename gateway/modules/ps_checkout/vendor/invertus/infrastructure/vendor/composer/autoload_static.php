@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitd50f4eec6c50e0f7236efbab0b610d7f
+class ComposerStaticInit59b0314bf37e80e81f402e52634c82be
 {
     public static $prefixLengthsPsr4 = array (
         'P' =>
@@ -30,8 +30,10 @@ class ComposerStaticInitd50f4eec6c50e0f7236efbab0b610d7f
         'PsCheckout\\Infrastructure\\Action\\CustomerAuthenticationActionInterface' => __DIR__ . '/../../..' . '/infrastructure/src/Action/CustomerAuthenticationActionInterface.php',
         'PsCheckout\\Infrastructure\\Action\\CustomerNotifyAction' => __DIR__ . '/../../..' . '/infrastructure/src/Action/CustomerNotifyAction.php',
         'PsCheckout\\Infrastructure\\Action\\CustomerNotifyActionInterface' => __DIR__ . '/../../..' . '/infrastructure/src/Action/CustomerNotifyActionInterface.php',
+        'PsCheckout\\Infrastructure\\Action\\ProcessExpressCheckoutAction' => __DIR__ . '/../../..' . '/infrastructure/src/Action/ProcessExpressCheckoutAction.php',
         'PsCheckout\\Infrastructure\\Action\\SaveBatchConfigurationAction' => __DIR__ . '/../../..' . '/infrastructure/src/Action/SaveBatchConfigurationAction.php',
         'PsCheckout\\Infrastructure\\Action\\SaveBatchConfigurationActionInterface' => __DIR__ . '/../../..' . '/infrastructure/src/Action/SaveBatchConfigurationActionInterface.php',
+        'PsCheckout\\Infrastructure\\Action\\SaveExpressCheckoutFlagsAction' => __DIR__ . '/../../..' . '/infrastructure/src/Action/SaveExpressCheckoutFlagsAction.php',
         'PsCheckout\\Infrastructure\\Adapter\\Address' => __DIR__ . '/../../..' . '/infrastructure/src/Adapter/Address.php',
         'PsCheckout\\Infrastructure\\Adapter\\AddressInterface' => __DIR__ . '/../../..' . '/infrastructure/src/Adapter/AddressInterface.php',
         'PsCheckout\\Infrastructure\\Adapter\\Cart' => __DIR__ . '/../../..' . '/infrastructure/src/Adapter/Cart.php',
@@ -74,6 +76,9 @@ class ComposerStaticInitd50f4eec6c50e0f7236efbab0b610d7f
         'PsCheckout\\Infrastructure\\Environment\\EnvInterface' => __DIR__ . '/../../..' . '/infrastructure/src/Environment/EnvInterface.php',
         'PsCheckout\\Infrastructure\\Environment\\EnvLoader' => __DIR__ . '/../../..' . '/infrastructure/src/Environment/EnvLoader.php',
         'PsCheckout\\Infrastructure\\Environment\\EnvLoaderInterface' => __DIR__ . '/../../..' . '/infrastructure/src/Environment/EnvLoaderInterface.php',
+        'PsCheckout\\Infrastructure\\Http\\Middleware\\HttpLoggingMiddleware' => __DIR__ . '/../../..' . '/infrastructure/src/Http/Middleware/HttpLoggingMiddleware.php',
+        'PsCheckout\\Infrastructure\\Http\\Subscriber\\HttpLoggingSubscriber' => __DIR__ . '/../../..' . '/infrastructure/src/Http/Subscriber/HttpLoggingSubscriber.php',
+        'PsCheckout\\Infrastructure\\Logger\\HttpLoggerHandlerFactory' => __DIR__ . '/../../..' . '/infrastructure/src/Logger/HttpLoggerHandlerFactory.php',
         'PsCheckout\\Infrastructure\\Logger\\LoggerFactory' => __DIR__ . '/../../..' . '/infrastructure/src/Logger/LoggerFactory.php',
         'PsCheckout\\Infrastructure\\Logger\\LoggerFactoryInterface' => __DIR__ . '/../../..' . '/infrastructure/src/Logger/LoggerFactoryInterface.php',
         'PsCheckout\\Infrastructure\\Logger\\LoggerFileFinder' => __DIR__ . '/../../..' . '/infrastructure/src/Logger/LoggerFileFinder.php',
@@ -83,6 +88,7 @@ class ComposerStaticInitd50f4eec6c50e0f7236efbab0b610d7f
         'PsCheckout\\Infrastructure\\Logger\\LoggerHandlerFactory' => __DIR__ . '/../../..' . '/infrastructure/src/Logger/LoggerHandlerFactory.php',
         'PsCheckout\\Infrastructure\\Logger\\LoggerHandlerInterface' => __DIR__ . '/../../..' . '/infrastructure/src/Logger/LoggerHandlerInterface.php',
         'PsCheckout\\Infrastructure\\Logger\\NullLogger' => __DIR__ . '/../../..' . '/infrastructure/src/Logger/NullLogger.php',
+        'PsCheckout\\Infrastructure\\Logger\\Processor\\SensitiveDataProcessor' => __DIR__ . '/../../..' . '/infrastructure/src/Logger/Processor/SensitiveDataProcessor.php',
         'PsCheckout\\Infrastructure\\Repository\\AddressRepository' => __DIR__ . '/../../..' . '/infrastructure/src/Repository/AddressRepository.php',
         'PsCheckout\\Infrastructure\\Repository\\AddressRepositoryInterface' => __DIR__ . '/../../..' . '/infrastructure/src/Repository/AddressRepositoryInterface.php',
         'PsCheckout\\Infrastructure\\Repository\\CartRepository' => __DIR__ . '/../../..' . '/infrastructure/src/Repository/CartRepository.php',
@@ -134,9 +140,9 @@ class ComposerStaticInitd50f4eec6c50e0f7236efbab0b610d7f
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitd50f4eec6c50e0f7236efbab0b610d7f::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitd50f4eec6c50e0f7236efbab0b610d7f::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitd50f4eec6c50e0f7236efbab0b610d7f::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit59b0314bf37e80e81f402e52634c82be::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit59b0314bf37e80e81f402e52634c82be::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit59b0314bf37e80e81f402e52634c82be::$classMap;
 
         }, null, ClassLoader::class);
     }
