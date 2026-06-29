@@ -1,1 +1,12 @@
-
+products_count;id_category;id_parent;active;name;description;position
+0;100;2;1;Bicicletas;;0
+0;145;2;1;Accesorios;;1
+0;226;2;1;Componentes;;2
+0;446;2;1;Moto;;3
+0;452;2;1;Taller;;4
+0;473;2;1;"Ropa y protecciones";;5
+0;488;2;1;Otros;;6
+0;497;2;1;Patinete;;7
+0;507;2;1;"Fixie Bike";;8
+0;508;2;1;"Recambios Ebikes";;9
+0;515;2;1;"Fat Bike";;10
